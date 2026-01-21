@@ -19,7 +19,7 @@ library(gprofiler2)
 genes_mb <- readLines(file.path(go_dir, "GeneList_MobilizedBlood.txt"))
 genes_bm <- readLines(file.path(go_dir, "GeneList_BoneMarrow.txt"))
 
-# Read the Background Universe
+# Read the Background
 bg_file <- file.path(go_dir, "GeneList_Background_Universe_CLEAN.txt")
 
 if(!file.exists(bg_file)) {
@@ -80,7 +80,6 @@ print_top_hits <- function(gost_obj, label) {
     # Sort by p-value
     top <- head(gost_obj$result[order(gost_obj$result$p_value), 
                                 c("source", "term_name", "p_value", "intersection_size")], 10)
-    # Format p-value for readability
     top$p_value <- format(top$p_value, scientific = TRUE, digits = 2)
     # Truncate long names
     top$term_name <- substr(top$term_name, 1, 50)
